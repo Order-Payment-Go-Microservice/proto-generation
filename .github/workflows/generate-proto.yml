@@ -1,0 +1,74 @@
+name: Generate Proto Code
+
+on:
+    workflow_dispatch:
+
+jobs:
+    generate:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        steps:
+            - name: Checkout proto-generation repository
+              uses: actions/checkout@v4
+
+            - name: Clone proto-files repository
+              run: |
+                  # Update the repo name below if your proto-files repo has a different name
+                  git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository_owner }}/proto-files.git proto-src
+
+            - name: Install Go
+              uses: actions/setup-go@v5
+              with:
+                  go-version: "1.25.5"
+
+            - name: Install protoc and plugins
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install -y protobuf-compiler
+                  go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+                  go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+                  echo "$HOME/go/bin" >> $GITHUB_PATH
+
+            - name: Generate Go Code from Proto Files
+              run: |
+                  mkdir -p gen/auth/v1
+                  mkdir -p gen/chat/v1
+                  mkdir -p gen/message/v1
+                  mkdir -p gen/notification/v1
+                  mkdir -p gen/user/v1
+
+                  protoc \
+                    --proto_path=proto-src/proto \
+                    --go_out=gen \
+                    --go_opt=paths=source_relative \
+                    --go-grpc_out=gen \
+                    --go-grpc_opt=paths=source_relative \
+                    proto-src/proto/auth/v1/auth.proto \
+                    proto-src/proto/chat/v1/chat.proto \
+                    proto-src/proto/message/v1/message.proto \
+                    proto-src/proto/notification/v1/notification.proto \
+                    proto-src/proto/user/v1/user.proto
+
+            - name: Create or update go.mod
+              run: |
+                  cat > go.mod << 'EOF'
+                  module github.com/${{ github.repository }}
+
+                  go 1.23
+
+                  require (
+                    google.golang.org/grpc v1.68.0
+                    google.golang.org/protobuf v1.36.0
+                  )
+                  EOF
+                  go mod tidy
+
+            - name: Commit and push generated files
+              run: |
+                  cp -r gen/* ./
+                  git config user.email "ci@github.com"
+                  git config user.name "GitHub Actions"
+                  git add .
+                  git diff --staged --quiet || git commit -m "regen: update generated proto code"
+                  git push
