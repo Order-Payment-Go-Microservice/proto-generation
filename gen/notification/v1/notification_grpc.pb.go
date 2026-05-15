@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -19,7 +20,18 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	NotificationService_SendNotification_FullMethodName = "/notification.NotificationService/SendNotification"
+	NotificationService_SendNotification_FullMethodName       = "/notification.NotificationService/SendNotification"
+	NotificationService_GetNotificationHistory_FullMethodName = "/notification.NotificationService/GetNotificationHistory"
+	NotificationService_DeleteNotification_FullMethodName     = "/notification.NotificationService/DeleteNotification"
+	NotificationService_MarkNotificationRead_FullMethodName   = "/notification.NotificationService/MarkNotificationRead"
+	NotificationService_GetUnreadCount_FullMethodName         = "/notification.NotificationService/GetUnreadCount"
+	NotificationService_MarkAllAsRead_FullMethodName          = "/notification.NotificationService/MarkAllAsRead"
+	NotificationService_UpdatePreferences_FullMethodName      = "/notification.NotificationService/UpdatePreferences"
+	NotificationService_GetPreferences_FullMethodName         = "/notification.NotificationService/GetPreferences"
+	NotificationService_DeleteAllNotifications_FullMethodName = "/notification.NotificationService/DeleteAllNotifications"
+	NotificationService_SearchNotifications_FullMethodName    = "/notification.NotificationService/SearchNotifications"
+	NotificationService_SubscribeToTopic_FullMethodName       = "/notification.NotificationService/SubscribeToTopic"
+	NotificationService_UnsubscribeFromTopic_FullMethodName   = "/notification.NotificationService/UnsubscribeFromTopic"
 )
 
 // NotificationServiceClient is the client API for NotificationService service.
@@ -27,6 +39,17 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type NotificationServiceClient interface {
 	SendNotification(ctx context.Context, in *NotificationRequest, opts ...grpc.CallOption) (*NotificationResponse, error)
+	GetNotificationHistory(ctx context.Context, in *GetHistoryRequest, opts ...grpc.CallOption) (*GetHistoryResponse, error)
+	DeleteNotification(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	MarkNotificationRead(ctx context.Context, in *MarkReadRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	GetUnreadCount(ctx context.Context, in *GetUnreadCountRequest, opts ...grpc.CallOption) (*UnreadCountResponse, error)
+	MarkAllAsRead(ctx context.Context, in *MarkAllReadRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdatePreferences(ctx context.Context, in *UpdatePreferencesRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	GetPreferences(ctx context.Context, in *GetPreferencesRequest, opts ...grpc.CallOption) (*PreferencesResponse, error)
+	DeleteAllNotifications(ctx context.Context, in *DeleteAllRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	SearchNotifications(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*GetHistoryResponse, error)
+	SubscribeToTopic(ctx context.Context, in *TopicRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UnsubscribeFromTopic(ctx context.Context, in *TopicRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type notificationServiceClient struct {
@@ -47,11 +70,132 @@ func (c *notificationServiceClient) SendNotification(ctx context.Context, in *No
 	return out, nil
 }
 
+func (c *notificationServiceClient) GetNotificationHistory(ctx context.Context, in *GetHistoryRequest, opts ...grpc.CallOption) (*GetHistoryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetHistoryResponse)
+	err := c.cc.Invoke(ctx, NotificationService_GetNotificationHistory_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationServiceClient) DeleteNotification(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, NotificationService_DeleteNotification_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationServiceClient) MarkNotificationRead(ctx context.Context, in *MarkReadRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, NotificationService_MarkNotificationRead_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationServiceClient) GetUnreadCount(ctx context.Context, in *GetUnreadCountRequest, opts ...grpc.CallOption) (*UnreadCountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UnreadCountResponse)
+	err := c.cc.Invoke(ctx, NotificationService_GetUnreadCount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationServiceClient) MarkAllAsRead(ctx context.Context, in *MarkAllReadRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, NotificationService_MarkAllAsRead_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationServiceClient) UpdatePreferences(ctx context.Context, in *UpdatePreferencesRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, NotificationService_UpdatePreferences_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationServiceClient) GetPreferences(ctx context.Context, in *GetPreferencesRequest, opts ...grpc.CallOption) (*PreferencesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PreferencesResponse)
+	err := c.cc.Invoke(ctx, NotificationService_GetPreferences_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationServiceClient) DeleteAllNotifications(ctx context.Context, in *DeleteAllRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, NotificationService_DeleteAllNotifications_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationServiceClient) SearchNotifications(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*GetHistoryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetHistoryResponse)
+	err := c.cc.Invoke(ctx, NotificationService_SearchNotifications_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationServiceClient) SubscribeToTopic(ctx context.Context, in *TopicRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, NotificationService_SubscribeToTopic_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notificationServiceClient) UnsubscribeFromTopic(ctx context.Context, in *TopicRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, NotificationService_UnsubscribeFromTopic_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // NotificationServiceServer is the server API for NotificationService service.
 // All implementations must embed UnimplementedNotificationServiceServer
 // for forward compatibility.
 type NotificationServiceServer interface {
 	SendNotification(context.Context, *NotificationRequest) (*NotificationResponse, error)
+	GetNotificationHistory(context.Context, *GetHistoryRequest) (*GetHistoryResponse, error)
+	DeleteNotification(context.Context, *DeleteRequest) (*emptypb.Empty, error)
+	MarkNotificationRead(context.Context, *MarkReadRequest) (*emptypb.Empty, error)
+	GetUnreadCount(context.Context, *GetUnreadCountRequest) (*UnreadCountResponse, error)
+	MarkAllAsRead(context.Context, *MarkAllReadRequest) (*emptypb.Empty, error)
+	UpdatePreferences(context.Context, *UpdatePreferencesRequest) (*emptypb.Empty, error)
+	GetPreferences(context.Context, *GetPreferencesRequest) (*PreferencesResponse, error)
+	DeleteAllNotifications(context.Context, *DeleteAllRequest) (*emptypb.Empty, error)
+	SearchNotifications(context.Context, *SearchRequest) (*GetHistoryResponse, error)
+	SubscribeToTopic(context.Context, *TopicRequest) (*emptypb.Empty, error)
+	UnsubscribeFromTopic(context.Context, *TopicRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedNotificationServiceServer()
 }
 
@@ -64,6 +208,39 @@ type UnimplementedNotificationServiceServer struct{}
 
 func (UnimplementedNotificationServiceServer) SendNotification(context.Context, *NotificationRequest) (*NotificationResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method SendNotification not implemented")
+}
+func (UnimplementedNotificationServiceServer) GetNotificationHistory(context.Context, *GetHistoryRequest) (*GetHistoryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetNotificationHistory not implemented")
+}
+func (UnimplementedNotificationServiceServer) DeleteNotification(context.Context, *DeleteRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteNotification not implemented")
+}
+func (UnimplementedNotificationServiceServer) MarkNotificationRead(context.Context, *MarkReadRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method MarkNotificationRead not implemented")
+}
+func (UnimplementedNotificationServiceServer) GetUnreadCount(context.Context, *GetUnreadCountRequest) (*UnreadCountResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetUnreadCount not implemented")
+}
+func (UnimplementedNotificationServiceServer) MarkAllAsRead(context.Context, *MarkAllReadRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method MarkAllAsRead not implemented")
+}
+func (UnimplementedNotificationServiceServer) UpdatePreferences(context.Context, *UpdatePreferencesRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdatePreferences not implemented")
+}
+func (UnimplementedNotificationServiceServer) GetPreferences(context.Context, *GetPreferencesRequest) (*PreferencesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPreferences not implemented")
+}
+func (UnimplementedNotificationServiceServer) DeleteAllNotifications(context.Context, *DeleteAllRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteAllNotifications not implemented")
+}
+func (UnimplementedNotificationServiceServer) SearchNotifications(context.Context, *SearchRequest) (*GetHistoryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SearchNotifications not implemented")
+}
+func (UnimplementedNotificationServiceServer) SubscribeToTopic(context.Context, *TopicRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method SubscribeToTopic not implemented")
+}
+func (UnimplementedNotificationServiceServer) UnsubscribeFromTopic(context.Context, *TopicRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method UnsubscribeFromTopic not implemented")
 }
 func (UnimplementedNotificationServiceServer) mustEmbedUnimplementedNotificationServiceServer() {}
 func (UnimplementedNotificationServiceServer) testEmbeddedByValue()                             {}
@@ -104,6 +281,204 @@ func _NotificationService_SendNotification_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _NotificationService_GetNotificationHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetHistoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationServiceServer).GetNotificationHistory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationService_GetNotificationHistory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationServiceServer).GetNotificationHistory(ctx, req.(*GetHistoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationService_DeleteNotification_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationServiceServer).DeleteNotification(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationService_DeleteNotification_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationServiceServer).DeleteNotification(ctx, req.(*DeleteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationService_MarkNotificationRead_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MarkReadRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationServiceServer).MarkNotificationRead(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationService_MarkNotificationRead_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationServiceServer).MarkNotificationRead(ctx, req.(*MarkReadRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationService_GetUnreadCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUnreadCountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationServiceServer).GetUnreadCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationService_GetUnreadCount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationServiceServer).GetUnreadCount(ctx, req.(*GetUnreadCountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationService_MarkAllAsRead_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MarkAllReadRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationServiceServer).MarkAllAsRead(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationService_MarkAllAsRead_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationServiceServer).MarkAllAsRead(ctx, req.(*MarkAllReadRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationService_UpdatePreferences_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePreferencesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationServiceServer).UpdatePreferences(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationService_UpdatePreferences_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationServiceServer).UpdatePreferences(ctx, req.(*UpdatePreferencesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationService_GetPreferences_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPreferencesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationServiceServer).GetPreferences(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationService_GetPreferences_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationServiceServer).GetPreferences(ctx, req.(*GetPreferencesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationService_DeleteAllNotifications_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAllRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationServiceServer).DeleteAllNotifications(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationService_DeleteAllNotifications_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationServiceServer).DeleteAllNotifications(ctx, req.(*DeleteAllRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationService_SearchNotifications_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationServiceServer).SearchNotifications(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationService_SearchNotifications_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationServiceServer).SearchNotifications(ctx, req.(*SearchRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationService_SubscribeToTopic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TopicRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationServiceServer).SubscribeToTopic(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationService_SubscribeToTopic_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationServiceServer).SubscribeToTopic(ctx, req.(*TopicRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotificationService_UnsubscribeFromTopic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TopicRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotificationServiceServer).UnsubscribeFromTopic(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: NotificationService_UnsubscribeFromTopic_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotificationServiceServer).UnsubscribeFromTopic(ctx, req.(*TopicRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // NotificationService_ServiceDesc is the grpc.ServiceDesc for NotificationService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -114,6 +489,50 @@ var NotificationService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SendNotification",
 			Handler:    _NotificationService_SendNotification_Handler,
+		},
+		{
+			MethodName: "GetNotificationHistory",
+			Handler:    _NotificationService_GetNotificationHistory_Handler,
+		},
+		{
+			MethodName: "DeleteNotification",
+			Handler:    _NotificationService_DeleteNotification_Handler,
+		},
+		{
+			MethodName: "MarkNotificationRead",
+			Handler:    _NotificationService_MarkNotificationRead_Handler,
+		},
+		{
+			MethodName: "GetUnreadCount",
+			Handler:    _NotificationService_GetUnreadCount_Handler,
+		},
+		{
+			MethodName: "MarkAllAsRead",
+			Handler:    _NotificationService_MarkAllAsRead_Handler,
+		},
+		{
+			MethodName: "UpdatePreferences",
+			Handler:    _NotificationService_UpdatePreferences_Handler,
+		},
+		{
+			MethodName: "GetPreferences",
+			Handler:    _NotificationService_GetPreferences_Handler,
+		},
+		{
+			MethodName: "DeleteAllNotifications",
+			Handler:    _NotificationService_DeleteAllNotifications_Handler,
+		},
+		{
+			MethodName: "SearchNotifications",
+			Handler:    _NotificationService_SearchNotifications_Handler,
+		},
+		{
+			MethodName: "SubscribeToTopic",
+			Handler:    _NotificationService_SubscribeToTopic_Handler,
+		},
+		{
+			MethodName: "UnsubscribeFromTopic",
+			Handler:    _NotificationService_UnsubscribeFromTopic_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

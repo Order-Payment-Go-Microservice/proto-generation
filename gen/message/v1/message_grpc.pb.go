@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -19,10 +20,18 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	MessageService_SendMessage_FullMethodName     = "/message.MessageService/SendMessage"
-	MessageService_GetChatHistory_FullMethodName  = "/message.MessageService/GetChatHistory"
-	MessageService_MarkAsRead_FullMethodName      = "/message.MessageService/MarkAsRead"
-	MessageService_MarkAsDelivered_FullMethodName = "/message.MessageService/MarkAsDelivered"
+	MessageService_SendMessage_FullMethodName       = "/message.MessageService/SendMessage"
+	MessageService_GetChatHistory_FullMethodName    = "/message.MessageService/GetChatHistory"
+	MessageService_MarkAsRead_FullMethodName        = "/message.MessageService/MarkAsRead"
+	MessageService_MarkAsDelivered_FullMethodName   = "/message.MessageService/MarkAsDelivered"
+	MessageService_DeleteMessage_FullMethodName     = "/message.MessageService/DeleteMessage"
+	MessageService_EditMessage_FullMethodName       = "/message.MessageService/EditMessage"
+	MessageService_SearchMessages_FullMethodName    = "/message.MessageService/SearchMessages"
+	MessageService_GetMessageStatus_FullMethodName  = "/message.MessageService/GetMessageStatus"
+	MessageService_PinMessage_FullMethodName        = "/message.MessageService/PinMessage"
+	MessageService_UnpinMessage_FullMethodName      = "/message.MessageService/UnpinMessage"
+	MessageService_GetPinnedMessages_FullMethodName = "/message.MessageService/GetPinnedMessages"
+	MessageService_ExportChatToEmail_FullMethodName = "/message.MessageService/ExportChatToEmail"
 )
 
 // MessageServiceClient is the client API for MessageService service.
@@ -33,6 +42,14 @@ type MessageServiceClient interface {
 	GetChatHistory(ctx context.Context, in *GetChatHistoryRequest, opts ...grpc.CallOption) (*GetChatHistoryResponse, error)
 	MarkAsRead(ctx context.Context, in *MarkAsReadRequest, opts ...grpc.CallOption) (*MessageResponse, error)
 	MarkAsDelivered(ctx context.Context, in *MarkAsDeliveredRequest, opts ...grpc.CallOption) (*MessageResponse, error)
+	DeleteMessage(ctx context.Context, in *DeleteMessageRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	EditMessage(ctx context.Context, in *EditMessageRequest, opts ...grpc.CallOption) (*MessageResponse, error)
+	SearchMessages(ctx context.Context, in *SearchMessagesRequest, opts ...grpc.CallOption) (*GetChatHistoryResponse, error)
+	GetMessageStatus(ctx context.Context, in *GetMessageStatusRequest, opts ...grpc.CallOption) (*MessageStatusResponse, error)
+	PinMessage(ctx context.Context, in *PinMessageRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UnpinMessage(ctx context.Context, in *UnpinMessageRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	GetPinnedMessages(ctx context.Context, in *GetPinnedMessagesRequest, opts ...grpc.CallOption) (*GetChatHistoryResponse, error)
+	ExportChatToEmail(ctx context.Context, in *ExportChatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type messageServiceClient struct {
@@ -83,6 +100,86 @@ func (c *messageServiceClient) MarkAsDelivered(ctx context.Context, in *MarkAsDe
 	return out, nil
 }
 
+func (c *messageServiceClient) DeleteMessage(ctx context.Context, in *DeleteMessageRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, MessageService_DeleteMessage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *messageServiceClient) EditMessage(ctx context.Context, in *EditMessageRequest, opts ...grpc.CallOption) (*MessageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MessageResponse)
+	err := c.cc.Invoke(ctx, MessageService_EditMessage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *messageServiceClient) SearchMessages(ctx context.Context, in *SearchMessagesRequest, opts ...grpc.CallOption) (*GetChatHistoryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetChatHistoryResponse)
+	err := c.cc.Invoke(ctx, MessageService_SearchMessages_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *messageServiceClient) GetMessageStatus(ctx context.Context, in *GetMessageStatusRequest, opts ...grpc.CallOption) (*MessageStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MessageStatusResponse)
+	err := c.cc.Invoke(ctx, MessageService_GetMessageStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *messageServiceClient) PinMessage(ctx context.Context, in *PinMessageRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, MessageService_PinMessage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *messageServiceClient) UnpinMessage(ctx context.Context, in *UnpinMessageRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, MessageService_UnpinMessage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *messageServiceClient) GetPinnedMessages(ctx context.Context, in *GetPinnedMessagesRequest, opts ...grpc.CallOption) (*GetChatHistoryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetChatHistoryResponse)
+	err := c.cc.Invoke(ctx, MessageService_GetPinnedMessages_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *messageServiceClient) ExportChatToEmail(ctx context.Context, in *ExportChatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, MessageService_ExportChatToEmail_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MessageServiceServer is the server API for MessageService service.
 // All implementations must embed UnimplementedMessageServiceServer
 // for forward compatibility.
@@ -91,6 +188,14 @@ type MessageServiceServer interface {
 	GetChatHistory(context.Context, *GetChatHistoryRequest) (*GetChatHistoryResponse, error)
 	MarkAsRead(context.Context, *MarkAsReadRequest) (*MessageResponse, error)
 	MarkAsDelivered(context.Context, *MarkAsDeliveredRequest) (*MessageResponse, error)
+	DeleteMessage(context.Context, *DeleteMessageRequest) (*emptypb.Empty, error)
+	EditMessage(context.Context, *EditMessageRequest) (*MessageResponse, error)
+	SearchMessages(context.Context, *SearchMessagesRequest) (*GetChatHistoryResponse, error)
+	GetMessageStatus(context.Context, *GetMessageStatusRequest) (*MessageStatusResponse, error)
+	PinMessage(context.Context, *PinMessageRequest) (*emptypb.Empty, error)
+	UnpinMessage(context.Context, *UnpinMessageRequest) (*emptypb.Empty, error)
+	GetPinnedMessages(context.Context, *GetPinnedMessagesRequest) (*GetChatHistoryResponse, error)
+	ExportChatToEmail(context.Context, *ExportChatRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedMessageServiceServer()
 }
 
@@ -112,6 +217,30 @@ func (UnimplementedMessageServiceServer) MarkAsRead(context.Context, *MarkAsRead
 }
 func (UnimplementedMessageServiceServer) MarkAsDelivered(context.Context, *MarkAsDeliveredRequest) (*MessageResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method MarkAsDelivered not implemented")
+}
+func (UnimplementedMessageServiceServer) DeleteMessage(context.Context, *DeleteMessageRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteMessage not implemented")
+}
+func (UnimplementedMessageServiceServer) EditMessage(context.Context, *EditMessageRequest) (*MessageResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method EditMessage not implemented")
+}
+func (UnimplementedMessageServiceServer) SearchMessages(context.Context, *SearchMessagesRequest) (*GetChatHistoryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SearchMessages not implemented")
+}
+func (UnimplementedMessageServiceServer) GetMessageStatus(context.Context, *GetMessageStatusRequest) (*MessageStatusResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMessageStatus not implemented")
+}
+func (UnimplementedMessageServiceServer) PinMessage(context.Context, *PinMessageRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method PinMessage not implemented")
+}
+func (UnimplementedMessageServiceServer) UnpinMessage(context.Context, *UnpinMessageRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method UnpinMessage not implemented")
+}
+func (UnimplementedMessageServiceServer) GetPinnedMessages(context.Context, *GetPinnedMessagesRequest) (*GetChatHistoryResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetPinnedMessages not implemented")
+}
+func (UnimplementedMessageServiceServer) ExportChatToEmail(context.Context, *ExportChatRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method ExportChatToEmail not implemented")
 }
 func (UnimplementedMessageServiceServer) mustEmbedUnimplementedMessageServiceServer() {}
 func (UnimplementedMessageServiceServer) testEmbeddedByValue()                        {}
@@ -206,6 +335,150 @@ func _MessageService_MarkAsDelivered_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MessageService_DeleteMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteMessageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MessageServiceServer).DeleteMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MessageService_DeleteMessage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MessageServiceServer).DeleteMessage(ctx, req.(*DeleteMessageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MessageService_EditMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EditMessageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MessageServiceServer).EditMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MessageService_EditMessage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MessageServiceServer).EditMessage(ctx, req.(*EditMessageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MessageService_SearchMessages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchMessagesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MessageServiceServer).SearchMessages(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MessageService_SearchMessages_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MessageServiceServer).SearchMessages(ctx, req.(*SearchMessagesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MessageService_GetMessageStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMessageStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MessageServiceServer).GetMessageStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MessageService_GetMessageStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MessageServiceServer).GetMessageStatus(ctx, req.(*GetMessageStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MessageService_PinMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PinMessageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MessageServiceServer).PinMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MessageService_PinMessage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MessageServiceServer).PinMessage(ctx, req.(*PinMessageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MessageService_UnpinMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnpinMessageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MessageServiceServer).UnpinMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MessageService_UnpinMessage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MessageServiceServer).UnpinMessage(ctx, req.(*UnpinMessageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MessageService_GetPinnedMessages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPinnedMessagesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MessageServiceServer).GetPinnedMessages(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MessageService_GetPinnedMessages_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MessageServiceServer).GetPinnedMessages(ctx, req.(*GetPinnedMessagesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MessageService_ExportChatToEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportChatRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MessageServiceServer).ExportChatToEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MessageService_ExportChatToEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MessageServiceServer).ExportChatToEmail(ctx, req.(*ExportChatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MessageService_ServiceDesc is the grpc.ServiceDesc for MessageService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -228,6 +501,38 @@ var MessageService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MarkAsDelivered",
 			Handler:    _MessageService_MarkAsDelivered_Handler,
+		},
+		{
+			MethodName: "DeleteMessage",
+			Handler:    _MessageService_DeleteMessage_Handler,
+		},
+		{
+			MethodName: "EditMessage",
+			Handler:    _MessageService_EditMessage_Handler,
+		},
+		{
+			MethodName: "SearchMessages",
+			Handler:    _MessageService_SearchMessages_Handler,
+		},
+		{
+			MethodName: "GetMessageStatus",
+			Handler:    _MessageService_GetMessageStatus_Handler,
+		},
+		{
+			MethodName: "PinMessage",
+			Handler:    _MessageService_PinMessage_Handler,
+		},
+		{
+			MethodName: "UnpinMessage",
+			Handler:    _MessageService_UnpinMessage_Handler,
+		},
+		{
+			MethodName: "GetPinnedMessages",
+			Handler:    _MessageService_GetPinnedMessages_Handler,
+		},
+		{
+			MethodName: "ExportChatToEmail",
+			Handler:    _MessageService_ExportChatToEmail_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
